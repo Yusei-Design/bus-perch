@@ -11,7 +11,7 @@ const CATEGORY_COLORS = {
 // 2. マップの初期化
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://tiles.openfreemap.org/styles/liberty', // OpenFreeMap
+  style: 'https://tiles.openfreemap.org/styles/positron', // OpenFreeMap
   center: [135.7681, 35.0116], // 京都市中心部
   zoom: 14
 });
