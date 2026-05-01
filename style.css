@@ -1,0 +1,94 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", sans-serif;
+  color: #333;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#sidebar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.legend h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+/* カテゴリーカラー */
+.cat-default { background-color: #A3A3A3; }
+.cat-green { background-color: #4CAF50; }
+.cat-gray { background-color: #757575; }
+.cat-blue { background-color: #2196F3; }
+.cat-red { background-color: #F44336; }
+
+/* 公式バス停ピン */
+.stop-marker {
+  width: 14px;
+  height: 14px;
+  background-color: #000;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 観察ログのポップアップ画像 */
+.popup-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-top: 8px;
+  display: block;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Perch | 待つ場所のズレ</title>
+  <!-- MapLibre GL JS -->
+  <link href="https://unpkg.com/maplibre-gl@4.x/dist/maplibre-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="map"></div>
+  
+  <div id="sidebar">
+    <h1>Bus Perch</h1>
+    <p>京都市バス停における「公式の待つ場所」と「身体が選び取る待つ場所」のズレを可視化するマップ。</p>
+    <div class="legend">
+      <h3>Perch分類</h3>
+      <ul>
+        <li><span class="color-box cat-default"></span> 通常待機／公式設備</li>
+        <li><span class="color-box cat-green"></span> おもてなし</li>
+        <li><span class="color-box cat-gray"></span> 黙認・境界</li>
+        <li><span class="color-box cat-blue"></span> 転用</li>
+        <li><span class="color-box cat-red"></span> 侵入</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.x/dist/maplibre-gl.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
