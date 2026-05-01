@@ -10,12 +10,24 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      page_size: 100, // 必要に応じてページネーションを追加
-    });
+    let allResults = [];
+    let hasMore = true;
+    let nextCursor = undefined;
 
-    const stops = response.results.map(page => ({
+    // 100件制限を回避するため、全件取得するまでループ（ページネーション）
+    while (hasMore) {
+      const response = await notion.databases.query({
+        database_id: DATABASE_ID,
+        page_size: 100,
+        start_cursor: nextCursor,
+      });
+
+      allResults.push(...response.results);
+      hasMore = response.has_more;
+      nextCursor = response.next_cursor;
+    }
+
+    const stops = allResults.map(page => ({
       id: page.properties['stop_id']?.rich_text[0]?.plain_text || null,
       name: page.properties['停留所名']?.rich_text[0]?.plain_text || '不明',
       lat: page.properties['緯度']?.number || null,
