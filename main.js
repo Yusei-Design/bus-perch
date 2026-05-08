@@ -365,7 +365,7 @@ async function initApp() {
   try {
     const [stopsRes, logsRes] = await Promise.all([
       fetch('/data/stops.json'),   // ビルド時生成の静的JSON
-      fetch('/api/get-logs'),      // 観察ログはNotion APIからリアルタイム取得
+      fetch('/api/get-logs'),      // 観察ログはNotion APIから取得
     ]);
     allStops = await stopsRes.json();
     allLogs  = await logsRes.json();

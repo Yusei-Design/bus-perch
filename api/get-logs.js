@@ -1,4 +1,4 @@
-const { Client } = require('@notionhq/client');
+import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const DATABASE_ID = process.env.NOTION_LOGS_DB_ID; // observation_logデータベースのID
@@ -8,12 +8,24 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      page_size: 100,
-    });
+    let allResults = [];
+    let hasMore = true;
+    let nextCursor = undefined;
 
-    const logs = response.results.map(page => ({
+    // 全件取得するためのページネーション
+    while (hasMore) {
+      const response = await notion.databases.query({
+        database_id: DATABASE_ID,
+        page_size: 100,
+        start_cursor: nextCursor,
+      });
+
+      allResults.push(...response.results);
+      hasMore = response.has_more;
+      nextCursor = response.next_cursor;
+    }
+
+    const logs = allResults.map(page => ({
       id: page.id,
       title: page.properties['記録名']?.title[0]?.plain_text || '無題',
       stopId: page.properties['stop_id']?.rollup?.array[0]?.rich_text[0]?.plain_text || null, // ロールアップ経由で取得したバス停のID
