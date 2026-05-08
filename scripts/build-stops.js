@@ -48,6 +48,8 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error('[build-stops] Error:', err);
-  process.exit(1);
+  console.error('[build-stops] Error:', err.message);
+  console.log('[build-stops] Skipped — site will deploy without stops.json');
+  // ビルドを失敗させず、サイトはそのままデプロイされる
+  process.exit(0);
 });
