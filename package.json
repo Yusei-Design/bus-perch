@@ -2,10 +2,6 @@
   "name": "bus-perch",
   "version": "1.0.0",
   "description": "京都市バス停における「公式の待つ場所」と「身体が選び取る待つ場所」のズレを可視化するマップ",
-  "scripts": {
-    "prebuild": "node scripts/build-stops.js",
-    "build": "echo 'Build complete'"
-  },
   "dependencies": {
     "@notionhq/client": "^2.2.14"
   }
