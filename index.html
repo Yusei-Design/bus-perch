@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Bus Perch | 待つ場所のズレ</title>
-  <!-- MapLibre GL JS -->
-  <link href="https://unpkg.com/maplibre-gl@4.x/dist/maplibre-gl.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="map"></div>
-  
-  <div id="sidebar">
-    <h1>Bus Perch</h1>
-    <p>京都市バス停における「公式の待つ場所」と「身体が選び取る待つ場所」のズレを可視化するマップ。</p>
-    <div class="legend">
-      <h3>Perch分類</h3>
-      <ul>
-        <li><span class="color-box cat-default"></span> 通常待機／公式設備</li>
-        <li><span class="color-box cat-green"></span> おもてなし</li>
-        <li><span class="color-box cat-gray"></span> 黙認・境界</li>
-        <li><span class="color-box cat-blue"></span> 転用</li>
-        <li><span class="color-box cat-red"></span> 侵入</li>
-      </ul>
-    </div>
+
+  <!-- フィルターバー -->
+  <div id="categoryFilter" class="filter-bar"></div>
+
+  <!-- カウントバー -->
+  <div id="countBar" class="count-bar"></div>
+
+  <!-- FABコントロール -->
+  <div class="fab-container">
+    <button type="button" class="fab-btn is-active" id="btnStops" title="バス停表示">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg>
+    </button>
+    <button type="button" class="fab-btn is-active" id="btnLines" title="ズレ線表示">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 20 4"/></svg>
+    </button>
+    <button type="button" class="fab-btn" id="btnHeat" title="ヒートマップ">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>
+    </button>
   </div>
 
-  <script src="https://unpkg.com/maplibre-gl@4.x/dist/maplibre-gl.js"></script>
+  <!-- 詳細パネル -->
+  <div id="infoPanel" class="info-panel">
+    <button class="panel-close" id="panelCloseBtn">×</button>
+    <div id="panelContent" class="panel-scroll"></div>
+  </div>
+
+  <!-- ライトボックス -->
+  <div id="lightbox" class="lightbox-overlay">
+    <button class="lightbox-close" id="lightboxCloseBtn">×</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="" />
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>
